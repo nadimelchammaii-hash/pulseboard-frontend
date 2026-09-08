@@ -40,7 +40,8 @@
       "deviceType": "MOBILE",
       "width": 780,
       "height": 2052,
-      "requested": true
+      "requested": true,
+      "implemented": "src/pages/register.vue"
     },
     {
       "folder": "logo",
@@ -93,7 +94,8 @@
       "deviceType": "MOBILE",
       "width": 780,
       "height": 1768,
-      "requested": true
+      "requested": true,
+      "implemented": "src/pages/login.vue"
     },
     {
       "folder": "kanban-board-desktop",
@@ -111,7 +113,8 @@
       "deviceType": "DESKTOP",
       "width": 2560,
       "height": 2814,
-      "requested": true
+      "requested": true,
+      "note": "Not implemented yet: this dashboard shows Projects/Sprints/Velocity/Activity data that doesn't exist until Phases 3-5. Building it now would mean faking data, so it's deferred until those phases land."
     },
     {
       "folder": "workspace-members-desktop",
@@ -120,7 +123,36 @@
       "deviceType": "DESKTOP",
       "width": 3712,
       "height": 2156,
-      "requested": true
+      "requested": true,
+      "implemented": "src/pages/workspace-members.vue",
+      "note": "Adapted, not pixel-identical: dropped fields with no backend support (squads/teams, 2FA status, per-member task counts, seat utilization, CSV export, bulk actions, pagination) and simplified roles to the real 3-tier model (owner/admin/member) instead of the mockup's Manager/Guest tiers. Same dark theme, sidebar shell, and card/table layout language."
+    },
+    {
+      "folder": null,
+      "title": "Workspaces list (create/switch)",
+      "id": null,
+      "deviceType": null,
+      "note": "No Stitch design exists for this screen. Built by hand following the Pulse Precision theme and the new AppShell layout (src/components/app/AppShell.vue), since users need somewhere to land and create/pick a workspace before Workspace Members is reachable.",
+      "requested": false,
+      "implemented": "src/pages/index.vue"
+    },
+    {
+      "folder": null,
+      "title": "Projects list (per workspace)",
+      "id": null,
+      "deviceType": null,
+      "note": "No Stitch design exists for this screen (kanban-board-desktop and dashboard-desktop are Phase 4+ territory, not a plain project list). Built by hand following the same AppShell/Pulse Precision pattern as the workspaces list.",
+      "requested": false,
+      "implemented": "src/pages/workspace-projects.vue"
+    },
+    {
+      "folder": null,
+      "title": "Project members",
+      "id": null,
+      "deviceType": null,
+      "note": "No Stitch design exists for this screen. Simpler sibling of the Workspace Members page: plain membership list (no roles), add restricted to existing workspace members via a select rather than free-form email invite.",
+      "requested": false,
+      "implemented": "src/pages/project-members.vue"
     },
     {
       "folder": "create-account-desktop",
@@ -130,7 +162,8 @@
       "width": 2560,
       "height": 2288,
       "note": "Not in the originally requested list; found in the project as the desktop counterpart to create-account",
-      "requested": false
+      "requested": false,
+      "implemented": "src/pages/register.vue"
     },
     {
       "folder": "sign-in-desktop",
@@ -140,7 +173,28 @@
       "width": 2560,
       "height": 2052,
       "note": "Not in the originally requested list; found in the project as the desktop counterpart to sign-in",
-      "requested": false
+      "requested": false,
+      "implemented": "src/pages/login.vue"
+    },
+    {
+      "folder": "forgot-password-desktop",
+      "title": "PulseBoard Desktop Forgot Password",
+      "id": "7d87abbec51b4508bde0dc10e071be43",
+      "deviceType": "DESKTOP",
+      "width": 2560,
+      "height": 2052,
+      "note": "Requested separately after Phase 1; no mobile variant fetched",
+      "requested": true,
+      "implemented": "src/pages/forgot-password.vue"
+    },
+    {
+      "folder": null,
+      "title": "Reset Password (set new password)",
+      "id": null,
+      "deviceType": null,
+      "note": "No Stitch design exists for this screen. Built by hand following the AuthShell/Pulse Precision pattern used by the other auth pages (matches forgot-password-desktop layout).",
+      "requested": false,
+      "implemented": "src/pages/reset-password.vue"
     }
   ]
 }
