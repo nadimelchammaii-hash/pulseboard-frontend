@@ -14,6 +14,7 @@ import ProjectMembers from '@/pages/project-members.vue'
 import Register from '@/pages/register.vue'
 import ResetPassword from '@/pages/reset-password.vue'
 import TaskDetail from '@/pages/task-detail.vue'
+import WorkspaceActivity from '@/pages/workspace-activity.vue'
 import WorkspaceMembers from '@/pages/workspace-members.vue'
 import WorkspaceProjects from '@/pages/workspace-projects.vue'
 import { useAuthStore } from '@/stores/auth'
@@ -68,6 +69,12 @@ const router = createRouter({
       path: '/workspaces/:workspaceId/projects',
       name: 'workspace-projects',
       component: WorkspaceProjects,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/workspaces/:workspaceId/activities',
+      name: 'workspace-activity',
+      component: WorkspaceActivity,
       meta: { requiresAuth: true },
     },
     {

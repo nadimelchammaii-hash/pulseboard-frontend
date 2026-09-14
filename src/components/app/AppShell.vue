@@ -38,6 +38,13 @@
           title="Projects / Boards"
           :to="{ name: 'workspace-projects', params: { workspaceId } }"
         />
+
+        <v-list-item
+          prepend-icon="mdi-pulse"
+          rounded="xl"
+          title="Activity Feed"
+          :to="{ name: 'workspace-activity', params: { workspaceId } }"
+        />
       </template>
 
       <v-list-item
@@ -124,7 +131,6 @@
     { title: 'Dashboard', icon: 'mdi-view-dashboard-outline' },
     { title: 'My Tasks', icon: 'mdi-check-circle-outline' },
     { title: 'Notifications', icon: 'mdi-bell-outline' },
-    { title: 'Activity Feed', icon: 'mdi-pulse' },
     { title: 'Settings', icon: 'mdi-cog-outline' },
   ]
 
