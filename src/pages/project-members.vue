@@ -17,14 +17,25 @@
         <span class="text-body-2 text-on-surface-variant">{{ projectStore.current.name }}</span>
       </div>
 
-      <div class="d-flex align-start justify-space-between mb-6 flex-wrap ga-4">
-        <div>
-          <h1 class="project-members__heading mb-1">{{ projectStore.current.name }}</h1>
+      <div class="d-flex align-center justify-space-between mb-4 flex-wrap ga-4">
+        <h1 class="project-members__heading">{{ projectStore.current.name }}</h1>
 
-          <p class="text-body-2 text-on-surface-variant">
-            {{ projectStore.members.length }} member{{ projectStore.members.length === 1 ? '' : 's' }}
-          </p>
-        </div>
+        <v-btn-toggle
+          class="project-members__tabs"
+          color="primary"
+          density="comfortable"
+          mandatory
+          variant="outlined"
+        >
+          <v-btn :to="{ name: 'project-board', params: { workspaceId, projectId } }">Board</v-btn>
+          <v-btn :to="{ name: 'project-members', params: { workspaceId, projectId } }">Members</v-btn>
+        </v-btn-toggle>
+      </div>
+
+      <div class="d-flex align-start justify-space-between mb-6 flex-wrap ga-4">
+        <p class="text-body-2 text-on-surface-variant">
+          {{ projectStore.members.length }} member{{ projectStore.members.length === 1 ? '' : 's' }}
+        </p>
 
         <v-btn v-if="canManage" color="primary" prepend-icon="mdi-account-plus-outline" @click="openAdd">
           Add member

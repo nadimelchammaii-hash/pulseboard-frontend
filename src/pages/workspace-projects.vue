@@ -84,7 +84,7 @@
               </span>
             </div>
 
-            <v-btn block color="primary" variant="tonal" @click="goToMembers(project.id)">
+            <v-btn block color="primary" variant="tonal" @click="goToBoard(project.id)">
               Open
             </v-btn>
           </v-card>
@@ -164,8 +164,8 @@
   const projectToDelete = ref<Project | null>(null)
   const deleting = ref(false)
 
-  function goToMembers (projectId: number) {
-    router.push({ name: 'project-members', params: { workspaceId: workspaceId.value, projectId } })
+  function goToBoard (projectId: number) {
+    router.push({ name: 'project-board', params: { workspaceId: workspaceId.value, projectId } })
   }
 
   async function submitCreate () {
@@ -176,7 +176,7 @@
       const project = await projectStore.createProject(workspaceId.value, { name: newProjectName.value })
       createDialog.value = false
       newProjectName.value = ''
-      goToMembers(project.id)
+      goToBoard(project.id)
     } catch (error) {
       if (isAxiosError(error) && error.response?.status === 422) {
         nameError.value = error.response.data.errors?.name ?? []

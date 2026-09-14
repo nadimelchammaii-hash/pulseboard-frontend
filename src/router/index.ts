@@ -9,9 +9,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import ForgotPassword from '@/pages/forgot-password.vue'
 import Index from '@/pages/index.vue'
 import Login from '@/pages/login.vue'
+import ProjectBoard from '@/pages/project-board.vue'
 import ProjectMembers from '@/pages/project-members.vue'
 import Register from '@/pages/register.vue'
 import ResetPassword from '@/pages/reset-password.vue'
+import TaskDetail from '@/pages/task-detail.vue'
 import WorkspaceMembers from '@/pages/workspace-members.vue'
 import WorkspaceProjects from '@/pages/workspace-projects.vue'
 import { useAuthStore } from '@/stores/auth'
@@ -72,6 +74,18 @@ const router = createRouter({
       path: '/workspaces/:workspaceId/projects/:projectId/members',
       name: 'project-members',
       component: ProjectMembers,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/workspaces/:workspaceId/projects/:projectId/board',
+      name: 'project-board',
+      component: ProjectBoard,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/workspaces/:workspaceId/projects/:projectId/tasks/:taskId',
+      name: 'task-detail',
+      component: TaskDetail,
       meta: { requiresAuth: true },
     },
   ],
