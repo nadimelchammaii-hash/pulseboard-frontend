@@ -24,6 +24,8 @@
 
       <v-list-item prepend-icon="mdi-view-grid-outline" rounded="xl" title="Workspaces" to="/" />
 
+      <v-list-item prepend-icon="mdi-bell-outline" rounded="xl" title="Notifications" :to="{ name: 'notifications' }" />
+
       <template v-if="workspaceId">
         <v-list-item
           prepend-icon="mdi-account-group-outline"
@@ -96,6 +98,14 @@
 
   <v-app-bar color="surface" :elevation="0">
     <v-app-bar-title class="app-shell__page-title">{{ title }}</v-app-bar-title>
+
+    <template #append>
+      <v-btn icon :to="{ name: 'notifications' }" variant="text">
+        <v-badge color="primary" :content="notificationStore.unreadCount" :model-value="notificationStore.unreadCount > 0">
+          <v-icon>mdi-bell-outline</v-icon>
+        </v-badge>
+      </v-btn>
+    </template>
   </v-app-bar>
 
   <v-container class="pa-6" fluid>
@@ -104,9 +114,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed } from 'vue'
+  import { computed, onMounted } from 'vue'
   import { useRouter } from 'vue-router'
   import { useAuthStore } from '@/stores/auth'
+  import { useNotificationStore } from '@/stores/notifications'
 
   defineProps<{
     title: string
@@ -116,6 +127,11 @@
 
   const router = useRouter()
   const authStore = useAuthStore()
+  const notificationStore = useNotificationStore()
+
+  onMounted(() => {
+    notificationStore.fetchUnreadCount()
+  })
 
   const initials = computed(() => {
     const name = authStore.user?.name ?? ''
@@ -130,7 +146,6 @@
   const comingSoonNav = [
     { title: 'Dashboard', icon: 'mdi-view-dashboard-outline' },
     { title: 'My Tasks', icon: 'mdi-check-circle-outline' },
-    { title: 'Notifications', icon: 'mdi-bell-outline' },
     { title: 'Settings', icon: 'mdi-cog-outline' },
   ]
 

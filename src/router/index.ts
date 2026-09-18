@@ -9,6 +9,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import ForgotPassword from '@/pages/forgot-password.vue'
 import Index from '@/pages/index.vue'
 import Login from '@/pages/login.vue'
+import Notifications from '@/pages/notifications.vue'
 import ProjectBoard from '@/pages/project-board.vue'
 import ProjectMembers from '@/pages/project-members.vue'
 import Register from '@/pages/register.vue'
@@ -58,6 +59,12 @@ const router = createRouter({
       name: 'reset-password',
       component: ResetPassword,
       meta: { guestOnly: true },
+    },
+    {
+      path: '/notifications',
+      name: 'notifications',
+      component: Notifications,
+      meta: { requiresAuth: true },
     },
     {
       path: '/workspaces/:workspaceId/members',
