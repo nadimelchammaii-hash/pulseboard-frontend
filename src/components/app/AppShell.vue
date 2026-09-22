@@ -114,7 +114,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, onMounted } from 'vue'
+  import { computed, onMounted, onUnmounted } from 'vue'
   import { useRouter } from 'vue-router'
   import { useAuthStore } from '@/stores/auth'
   import { useNotificationStore } from '@/stores/notifications'
@@ -129,8 +129,17 @@
   const authStore = useAuthStore()
   const notificationStore = useNotificationStore()
 
+  let unsubscribe: (() => void) | null = null
+
   onMounted(() => {
     notificationStore.fetchUnreadCount()
+    if (authStore.user) {
+      unsubscribe = notificationStore.subscribeToLiveNotifications(authStore.user.id)
+    }
+  })
+
+  onUnmounted(() => {
+    unsubscribe?.()
   })
 
   const initials = computed(() => {
