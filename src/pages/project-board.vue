@@ -166,7 +166,7 @@
 <script lang="ts" setup>
   import type { Task, TaskPriority, TaskStatus } from '@/api/tasks'
   import { isAxiosError } from 'axios'
-  import { computed, onMounted, ref } from 'vue'
+  import { computed, onMounted, onUnmounted, ref } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import AppShell from '@/components/app/AppShell.vue'
   import { useProjectStore } from '@/stores/projects'
@@ -286,6 +286,8 @@
     }
   }
 
+  let unsubscribe: (() => void) | null = null
+
   onMounted(async () => {
     loading.value = true
     try {
@@ -293,9 +295,14 @@
       await projectStore.fetchProject(workspaceId.value, projectId.value)
       await projectStore.fetchMembers(workspaceId.value, projectId.value)
       await taskStore.fetchTasks(workspaceId.value, projectId.value)
+      unsubscribe = taskStore.subscribeToProjectChannel(projectId.value)
     } finally {
       loading.value = false
     }
+  })
+
+  onUnmounted(() => {
+    unsubscribe?.()
   })
 </script>
 

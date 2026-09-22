@@ -70,7 +70,7 @@
 
 <script lang="ts" setup>
   import type { Activity } from '@/api/activities'
-  import { computed, onMounted, ref } from 'vue'
+  import { computed, onMounted, onUnmounted, ref } from 'vue'
   import { useRoute } from 'vue-router'
   import AppShell from '@/components/app/AppShell.vue'
   import { useActivityStore } from '@/stores/activities'
@@ -166,14 +166,21 @@
     return new Date(isoDate).toLocaleDateString()
   }
 
+  let unsubscribe: (() => void) | null = null
+
   onMounted(async () => {
     loading.value = true
     try {
       await workspaceStore.fetchWorkspace(workspaceId.value)
       await activityStore.fetchActivities(workspaceId.value)
+      unsubscribe = activityStore.subscribeToWorkspaceChannel(workspaceId.value)
     } finally {
       loading.value = false
     }
+  })
+
+  onUnmounted(() => {
+    unsubscribe?.()
   })
 </script>
 

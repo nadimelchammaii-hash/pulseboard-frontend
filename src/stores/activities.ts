@@ -2,6 +2,7 @@ import type { Activity } from '@/api/activities'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { listActivities } from '@/api/activities'
+import echo from '@/plugins/echo'
 
 export const useActivityStore = defineStore('activities', () => {
   const activities = ref<Activity[]>([])
@@ -37,5 +38,27 @@ export const useActivityStore = defineStore('activities', () => {
     }
   }
 
-  return { activities, loading, loadingMore, currentPage, lastPage, fetchActivities, fetchNextPage }
+  function subscribeToWorkspaceChannel (workspaceId: number) {
+    const applyRealtimeActivity = (event: Omit<Activity, 'id'>) => {
+      activities.value = [{ ...event, id: -Date.now() }, ...activities.value]
+    }
+
+    echo.private(`workspace.${workspaceId}`)
+      .listen('.workspace.member_invited', applyRealtimeActivity)
+      .listen('.workspace.member_removed', applyRealtimeActivity)
+      .listen('.workspace.member_role_changed', applyRealtimeActivity)
+
+    return () => echo.leave(`workspace.${workspaceId}`)
+  }
+
+  return {
+    activities,
+    loading,
+    loadingMore,
+    currentPage,
+    lastPage,
+    fetchActivities,
+    fetchNextPage,
+    subscribeToWorkspaceChannel,
+  }
 })

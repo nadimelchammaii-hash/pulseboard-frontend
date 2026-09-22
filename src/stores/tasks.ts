@@ -8,6 +8,7 @@ import type {
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import * as tasksApi from '@/api/tasks'
+import echo from '@/plugins/echo'
 
 export const useTaskStore = defineStore('tasks', () => {
   const tasks = ref<Task[]>([])
@@ -26,7 +27,7 @@ export const useTaskStore = defineStore('tasks', () => {
 
   async function createTask (workspaceId: number, projectId: number, payload: CreateTaskPayload) {
     const task = await tasksApi.createTask(workspaceId, projectId, payload)
-    tasks.value.push(task)
+    applyRealtimeTask(task)
     return task
   }
 
@@ -62,13 +63,58 @@ export const useTaskStore = defineStore('tasks', () => {
 
   async function addComment (workspaceId: number, projectId: number, taskId: number, body: string) {
     const comment = await tasksApi.addComment(workspaceId, projectId, taskId, body)
-    comments.value.push(comment)
+    applyRealtimeComment(taskId, comment)
     return comment
   }
 
   async function removeComment (workspaceId: number, projectId: number, taskId: number, commentId: number) {
     await tasksApi.deleteComment(workspaceId, projectId, taskId, commentId)
     comments.value = comments.value.filter(c => c.id !== commentId)
+  }
+
+  function applyRealtimeTask (task: Task) {
+    const exists = tasks.value.some(t => t.id === task.id)
+    tasks.value = exists ? tasks.value.map(t => t.id === task.id ? task : t) : [...tasks.value, task]
+
+    if (current.value?.id === task.id) {
+      current.value = task
+    }
+  }
+
+  function removeRealtimeTask (taskId: number) {
+    tasks.value = tasks.value.filter(t => t.id !== taskId)
+    if (current.value?.id === taskId) {
+      current.value = null
+    }
+  }
+
+  function applyRealtimeComment (taskId: number, comment: TaskComment) {
+    // The REST response and the broadcast echo can both deliver the same comment
+    // (the broadcast fires synchronously and may beat the HTTP response back to
+    // the sender's own browser), so treat this as an idempotent upsert.
+    const alreadySeen = current.value?.id === taskId && comments.value.some(c => c.id === comment.id)
+    if (alreadySeen) {
+      return
+    }
+
+    tasks.value = tasks.value.map(t => t.id === taskId && t.comments_count !== null
+      ? { ...t, comments_count: t.comments_count + 1 }
+      : t)
+
+    if (current.value?.id === taskId) {
+      comments.value = [...comments.value, comment]
+    }
+  }
+
+  function subscribeToProjectChannel (projectId: number) {
+    echo.private(`project.${projectId}`)
+      .listen('.task.created', (event: { task: Task }) => applyRealtimeTask(event.task))
+      .listen('.task.moved', (event: { task: Task }) => applyRealtimeTask(event.task))
+      .listen('.task.assignee_changed', (event: { task: Task }) => applyRealtimeTask(event.task))
+      .listen('.task.deleted', (event: { task_id: number }) => removeRealtimeTask(event.task_id))
+      .listen('.task_comment.added', (event: { task_id: number, comment: TaskComment }) => applyRealtimeComment(event.task_id, event.comment))
+
+    return () => echo.leave(`project.${projectId}`)
   }
 
   return {
@@ -85,5 +131,6 @@ export const useTaskStore = defineStore('tasks', () => {
     fetchComments,
     addComment,
     removeComment,
+    subscribeToProjectChannel,
   }
 })

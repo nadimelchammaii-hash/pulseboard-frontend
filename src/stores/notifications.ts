@@ -7,6 +7,7 @@ import {
   markAllNotificationsRead,
   markNotificationRead,
 } from '@/api/notifications'
+import echo from '@/plugins/echo'
 
 export const useNotificationStore = defineStore('notifications', () => {
   const notifications = ref<AppNotification[]>([])
@@ -65,6 +66,18 @@ export const useNotificationStore = defineStore('notifications', () => {
     unreadCount.value = 0
   }
 
+  function subscribeToLiveNotifications (userId: number) {
+    echo.private(`App.Models.User.${userId}`)
+      .notification((notification: AppNotification) => {
+        if (!notifications.value.some(n => n.id === notification.id)) {
+          notifications.value = [notification, ...notifications.value]
+        }
+        unreadCount.value += 1
+      })
+
+    return () => echo.leave(`App.Models.User.${userId}`)
+  }
+
   return {
     notifications,
     loading,
@@ -77,5 +90,6 @@ export const useNotificationStore = defineStore('notifications', () => {
     fetchUnreadCount,
     markRead,
     markAllRead,
+    subscribeToLiveNotifications,
   }
 })
