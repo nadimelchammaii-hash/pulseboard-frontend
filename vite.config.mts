@@ -1,5 +1,4 @@
 import { fileURLToPath, URL } from 'node:url'
-import tailwindcss from '@tailwindcss/vite'
 import Vue from '@vitejs/plugin-vue'
 import Fonts from 'unplugin-fonts/vite'
 import { defineConfig } from 'vite'
@@ -8,7 +7,6 @@ import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    tailwindcss(),
     Vue({
       template: { transformAssetUrls },
     }),
@@ -23,13 +21,16 @@ export default defineConfig({
       fontsource: {
         families: [
           {
-            name: 'Roboto Mono',
-            weights: [400, 700],
+            name: 'Hanken Grotesk',
+            weights: [500, 600, 700],
           },
           {
-            name: 'Roboto',
-            weights: [100, 300, 400, 500, 700, 900],
-            styles: ['normal', 'italic'],
+            name: 'Inter',
+            weights: [400, 500, 600, 700],
+          },
+          {
+            name: 'JetBrains Mono',
+            weights: [400, 500],
           },
         ],
       },

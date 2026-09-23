@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-surface-variant": "#c7c4d7",
+                "outline": "#908fa0",
+                "primary-container": "#8083ff",
+                "tertiary-fixed-dim": "#4edea3",
+                "on-tertiary-fixed-variant": "#005236",
+                "on-secondary-container": "#c4abff",
+                "surface-bright": "#31394d",
+                "surface-container-lowest": "#060e20",
+                "on-error-container": "#ffdad6",
+                "surface-container-low": "#131b2e",
+                "on-secondary-fixed": "#23005c",
+                "secondary-fixed-dim": "#d0bcff",
+                "secondary": "#d0bcff",
+                "on-primary-container": "#0d0096",
+                "surface-dim": "#0b1326",
+                "error": "#ffb4ab",
+                "on-tertiary": "#003824",
+                "inverse-primary": "#494bd6",
+                "on-secondary-fixed-variant": "#5516be",
+                "inverse-surface": "#dae2fd",
+                "on-background": "#dae2fd",
+                "secondary-container": "#571bc1",
+                "on-secondary": "#3c0091",
+                "on-primary": "#1000a9",
+                "tertiary-container": "#00885d",
+                "surface-container-highest": "#2d3449",
+                "primary": "#c0c1ff",
+                "error-container": "#93000a",
+                "primary-fixed": "#e1e0ff",
+                "on-tertiary-fixed": "#002113",
+                "on-surface": "#dae2fd",
+                "on-primary-fixed-variant": "#2f2ebe",
+                "primary-fixed-dim": "#c0c1ff",
+                "surface-tint": "#c0c1ff",
+                "on-primary-fixed": "#07006c",
+                "surface-container": "#171f33",
+                "inverse-on-surface": "#283044",
+                "secondary-fixed": "#e9ddff",
+                "on-tertiary-container": "#000703",
+                "surface-container-high": "#222a3d",
+                "tertiary": "#4edea3",
+                "outline-variant": "#464554",
+                "tertiary-fixed": "#6ffbbe",
+                "background": "#0b1326",
+                "on-error": "#690005",
+                "surface-variant": "#2d3449",
+                "surface": "#0b1326"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "space-xs": "0.25rem",
+                "space-md": "0.75rem",
+                "space-2xl": "3rem",
+                "sidebar-width-expanded": "256px",
+                "gutter-mobile": "0.75rem",
+                "gutter-desktop": "1.5rem",
+                "space-sm": "0.5rem",
+                "sidebar-width-collapsed": "64px",
+                "kanban-column-width": "300px",
+                "space-2xs": "0.125rem",
+                "space-xl": "2rem",
+                "space-3xl": "4rem",
+                "space-lg": "1.5rem",
+                "space-base": "1rem"
+        },
+        "fontFamily": {
+                "headline-sm": [
+                        "hankenGrotesk"
+                ],
+                "headline-lg": [
+                        "hankenGrotesk"
+                ],
+                "headline-md": [
+                        "hankenGrotesk"
+                ],
+                "headline-xl": [
+                        "hankenGrotesk"
+                ],
+                "body-md": [
+                        "inter"
+                ],
+                "headline-xl-mobile": [
+                        "hankenGrotesk"
+                ],
+                "counter-sm": [
+                        "jetbrainsMono"
+                ],
+                "body-lg": [
+                        "inter"
+                ],
+                "label-caps": [
+                        "inter"
+                ],
+                "body-bold": [
+                        "inter"
+                ],
+                "body-sm": [
+                        "inter"
+                ],
+                "label-code": [
+                        "jetbrainsMono"
+                ],
+                "display-hero": [
+                        "hankenGrotesk"
+                ]
+        },
+        "fontSize": {
+                "headline-sm": [
+                        "15px",
+                        {
+                                "lineHeight": "22px",
+                                "letterSpacing": "-0.005em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "letterSpacing": "-0.015em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "18px",
+                        {
+                                "lineHeight": "26px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-xl": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-xl-mobile": [
+                        "26px",
+                        {
+                                "lineHeight": "34px",
+                                "letterSpacing": "-0.015em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "counter-sm": [
+                        "11px",
+                        {
+                                "lineHeight": "14px",
+                                "letterSpacing": "0",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-lg": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "letterSpacing": "-0.005em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-caps": [
+                        "11px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.06em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-bold": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "18px",
+                                "letterSpacing": "0",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-code": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "display-hero": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.025em",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+      }
+    }
+  }</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased selection:bg-primary selection:text-on-primary"><aside class="fixed left-0 top-0 h-full w-sidebar-width-expanded bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="p-space-base flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Brand logo. - Primary color: #6366f1
+- Font: hankenGrotesk
+- Mode: dark
+- Roundness: rounded-sm
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1V7zpIHMIUPZXhIzTfr_DcJUSeS6gjF2eejE-_UucAuVonUMPtVC7yCPloyETAPNbdmhYW8e_PrTXMuzx_caTNN1Sy8K2jDBAFjDPEb-to3DCHtOijM8Q9EBKkq2uWs6YkGKCjuiYDjBCgbfujDMWs1DSkWj7ce9B-498Vj9XRfrFFyaR0Bm9gwlczOYzTwDgLhfEHS6g1aCAwkgFZ_UmTvh6mYFFrjJbAmzuWv9svMk6rLSPXQE24b8-M"/><span class="font-headline-md text-headline-md text-on-surface tracking-tight">PulseBoard</span></div><span class="material-symbols-outlined text-outline cursor-pointer hover:text-on-surface transition-colors text-base">unfold_more</span></div><div class="px-space-base pb-space-sm"><div class="flex items-center justify-between px-space-md py-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer"><div class="flex items-center gap-space-sm min-w-0"><div class="w-2 h-2 rounded-full bg-tertiary shrink-0"></div><div class="flex flex-col min-w-0"><span class="font-body-bold text-body-bold text-on-surface truncate text-xs">Acme Engineering</span><span class="font-label-code text-label-code text-outline truncate text-[10px]">acme-eng.pulseboard.io</span></div></div><span class="material-symbols-outlined text-outline text-sm shrink-0">expand_more</span></div></div><div class="px-space-base pt-space-sm"><span class="font-label-caps text-label-caps text-outline uppercase tracking-wider block mb-space-xs px-space-xs">Workspace</span><nav class="flex flex-col gap-space-2xs" data-active-classes="bg-surface-container-high text-on-surface font-body-bold"><a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="dashboard" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-sm">dashboard</span><span class="font-body-md text-body-md">Dashboard</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="workspaces" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-sm">workspaces</span><span class="font-body-md text-body-md">Workspaces</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="projects-boards" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-sm">view_kanban</span><span class="font-body-md text-body-md">Projects / Boards</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="my-tasks" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-sm">check_circle</span><span class="font-body-md text-body-md">My Tasks</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="notifications" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-sm">notifications</span><span class="font-body-md text-body-md">Notifications</span></div><span class="bg-secondary-container text-on-secondary-container font-counter-sm text-counter-sm px-space-xs py-space-2xs rounded-full min-w-[18px] text-center">3</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="activity-feed" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-sm">dynamic_feed</span><span class="font-body-md text-body-md">Activity Feed</span></div></a></nav></div></div><div class="p-space-base"><nav class="flex flex-col gap-space-2xs" data-active-classes="bg-surface-container-high text-on-surface font-body-bold"><a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="settings" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-sm">settings</span><span class="font-body-md text-body-md">Settings</span></div></a></nav><div class="mt-space-sm pt-space-sm border-t border-outline-variant/20 flex items-center justify-between"><div class="flex items-center gap-space-xs text-outline font-label-code text-label-code"><span class="material-symbols-outlined text-sm">circle</span><span>v2.14-prod</span></div><button class="text-outline hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-sm">keyboard_double_arrow_left</span></button></div></div></aside><div class="pl-sidebar-width-expanded"><header class="fixed top-0 left-sidebar-width-expanded right-0 z-40 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-space-lg flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md flex-1 max-w-lg"><div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-space-xs rounded-xl w-full text-on-surface-variant focus-within:text-on-surface"><span class="material-symbols-outlined text-sm text-outline">search</span><input class="bg-transparent border-none outline-none font-body-sm text-body-sm text-on-surface placeholder:text-outline w-full" placeholder="Search tasks, projects, docs..." type="text"/><div class="flex items-center gap-space-2xs"><kbd class="font-label-code text-label-code bg-surface-container-high text-outline px-space-xs py-space-2xs rounded-lg text-[10px]">⌘K</kbd></div></div></div><div class="flex items-center gap-space-md"><button class="flex items-center gap-space-xs bg-primary text-on-primary px-space-md py-space-xs rounded-xl hover:bg-primary-fixed transition-colors"><span class="material-symbols-outlined text-base">add</span><span class="font-body-bold text-body-bold text-xs">New Issue</span></button><div class="h-6 w-px bg-outline-variant/30"></div><div class="relative"><button class="w-9 h-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-xl">notifications</span></button><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-tertiary ring-2 ring-surface"></span></div><button class="w-9 h-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-xl">help_outline</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="relative"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1UQDB5rHcl21xIxPpzBOr7qvlyST2C-_3-nab1EY_YrlIlxy0rpOW0RuRTFDdxpnV5-nLSzF7SOonimCE621nD_OV0s6wRnGUZxonsuUCJlYRPUybFLyLT4LpytRQo6PW7PYRaj1P4vHyWS8ibXg6VsQ_EgkfVM0y-RRwzTWNMGkO0dzBjoJeOdCk_xhOA_UeVNF0-I-BcrVWgf7_cuTVUojU-hdMVZmhy89qLhnEtQXdlVmLO4N8eO6g"/><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-tertiary ring-2 ring-surface"></span></div><div class="hidden xl:flex flex-col text-left"><span class="font-body-bold text-body-bold text-xs text-on-surface leading-tight">Elena Rostova</span><span class="font-body-sm text-body-sm text-outline text-[11px] leading-tight">Lead Dev</span></div></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="p-space-lg space-y-space-lg">
+<!-- Breadcrumb & Top Metadata Bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm font-label-code text-label-code text-outline">
+<span class="hover:text-on-surface cursor-pointer transition-colors">Acme Engineering</span>
+<span>/</span>
+<span class="hover:text-on-surface cursor-pointer transition-colors">Access Management</span>
+<span>/</span>
+<span class="text-primary font-body-bold">Directory</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center gap-space-xs font-label-code text-label-code bg-surface-container-high px-space-sm py-space-2xs rounded-full text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>SSO Enforced</span>
+</span>
+<span class="font-label-code text-label-code bg-surface-container-low px-space-sm py-space-2xs rounded-full text-on-surface-variant">
+          Plan: Enterprise Plus (30 Seats)
+        </span>
+</div>
+</div>
+<!-- Page Title & Header Actions -->
+<div class="flex flex-col xl:flex-row xl:items-end justify-between gap-space-lg pb-space-xs">
+<div class="space-y-space-xs max-w-3xl">
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Team Members &amp; Permissions</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+          Manage workspace access, invite colleagues, and configure role-based permissions (18 members across 4 squads).
+        </p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="flex items-center gap-space-xs bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-bold text-body-bold px-space-md py-space-sm rounded-xl transition-colors shadow-sm">
+<span class="material-symbols-outlined text-base text-outline">file_download</span>
+<span>Export CSV</span>
+</button>
+<button class="flex items-center gap-space-xs bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-bold text-body-bold px-space-md py-space-sm rounded-xl transition-colors shadow-sm">
+<span class="material-symbols-outlined text-base text-outline">checklist</span>
+<span>Bulk Actions</span>
+</button>
+<button class="flex items-center gap-space-xs bg-primary-container hover:bg-primary text-on-primary font-body-bold text-body-bold px-space-lg py-space-sm rounded-xl transition-all shadow-md" id="open-invite-btn">
+<span class="material-symbols-outlined text-lg">person_add</span>
+<span>Invite New Member</span>
+</button>
+</div>
+</div>
+<!-- Quick Summary KPI Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Total Members -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between text-outline mb-space-sm">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-outline">Total Members</span>
+<span class="material-symbols-outlined text-base">groups</span>
+</div>
+<div class="flex items-baseline justify-between">
+<span class="font-headline-lg text-headline-lg text-on-surface">18</span>
+<span class="font-counter-sm text-counter-sm text-tertiary flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-xs">trending_up</span> +3 this month
+          </span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-space-sm overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 72%;"></div>
+</div>
+</div>
+<!-- Active Seats Utilization -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between text-outline mb-space-sm">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-outline">Active Seats</span>
+<span class="material-symbols-outlined text-base">airline_seat_recline_normal</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="flex items-baseline gap-space-2xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">18</span>
+<span class="font-body-md text-body-md text-outline">/ 25</span>
+</div>
+<span class="font-counter-sm text-counter-sm text-on-secondary-container bg-secondary-container px-space-xs py-space-2xs rounded-full">
+            7 available
+          </span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-space-sm overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 72%;"></div>
+</div>
+</div>
+<!-- Pending Invitations -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between text-outline mb-space-sm">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-outline">Pending Invites</span>
+<span class="material-symbols-outlined text-base">mail</span>
+</div>
+<div class="flex items-baseline justify-between">
+<span class="font-headline-lg text-headline-lg text-on-surface">2</span>
+<span class="font-counter-sm text-counter-sm text-outline">Expires in 48h</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-space-sm overflow-hidden">
+<div class="bg-outline h-full rounded-full" style="width: 25%;"></div>
+</div>
+</div>
+<!-- Workspace Admins / Leads -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between text-outline mb-space-sm">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-outline">Workspace Admins</span>
+<span class="material-symbols-outlined text-base">security</span>
+</div>
+<div class="flex items-baseline justify-between">
+<span class="font-headline-lg text-headline-lg text-on-surface">4</span>
+<span class="font-counter-sm text-counter-sm text-tertiary flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-xs">verified</span> 100% 2FA
+          </span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-space-sm overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+</div>
+<!-- Filter & Search Toolbar -->
+<div class="bg-surface-container-low p-space-sm rounded-xl flex flex-col lg:flex-row items-center justify-between gap-space-md shadow-sm">
+<!-- Search Input -->
+<div class="flex items-center gap-space-sm bg-surface-container px-space-md py-space-xs rounded-xl w-full lg:w-96 text-on-surface-variant focus-within:text-on-surface">
+<span class="material-symbols-outlined text-base text-outline">search</span>
+<input class="bg-transparent border-none outline-none font-body-sm text-body-sm text-on-surface placeholder:text-outline w-full" id="member-search-input" placeholder="Search by name, email, or role... [⌘F]" type="text"/>
+<kbd class="font-label-code text-label-code bg-surface-container-high text-outline px-space-xs py-space-2xs rounded-lg text-[10px]">⌘F</kbd>
+</div>
+<!-- Filter Controls Group -->
+<div class="flex flex-wrap items-center gap-space-xs w-full lg:w-auto justify-start lg:justify-end">
+<!-- Role Filter -->
+<div class="relative inline-block text-left">
+<button class="flex items-center gap-space-xs bg-surface-container px-space-md py-space-xs rounded-xl hover:bg-surface-container-high transition-colors font-body-sm text-body-sm text-on-surface">
+<span class="text-outline">Role:</span>
+<span class="font-body-bold">All Roles</span>
+<span class="material-symbols-outlined text-xs text-outline">expand_more</span>
+</button>
+</div>
+<!-- Status Filter -->
+<div class="relative inline-block text-left">
+<button class="flex items-center gap-space-xs bg-surface-container px-space-md py-space-xs rounded-xl hover:bg-surface-container-high transition-colors font-body-sm text-body-sm text-on-surface">
+<span class="text-outline">Status:</span>
+<span class="font-body-bold">Active</span>
+<span class="material-symbols-outlined text-xs text-outline">expand_more</span>
+</button>
+</div>
+<!-- Squad Filter -->
+<div class="relative inline-block text-left">
+<button class="flex items-center gap-space-xs bg-surface-container px-space-md py-space-xs rounded-xl hover:bg-surface-container-high transition-colors font-body-sm text-body-sm text-on-surface">
+<span class="text-outline">Squad:</span>
+<span class="font-body-bold">All Teams</span>
+<span class="material-symbols-outlined text-xs text-outline">expand_more</span>
+</button>
+</div>
+<button class="p-space-xs rounded-xl bg-surface-container hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors" title="Reset Filters">
+<span class="material-symbols-outlined text-base">filter_alt_off</span>
+</button>
+</div>
+</div>
+<!-- Workspace Member Directory Table -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container font-label-caps text-label-caps uppercase tracking-wider text-outline">
+<th class="py-space-md px-space-md w-10">
+<input class="rounded bg-surface-container-high accent-primary cursor-pointer w-3.5 h-3.5" type="checkbox"/>
+</th>
+<th class="py-space-md px-space-md font-headline-sm text-headline-sm">Member</th>
+<th class="py-space-md px-space-md font-headline-sm text-headline-sm">Role &amp; Authority</th>
+<th class="py-space-md px-space-md font-headline-sm text-headline-sm">Squads / Teams</th>
+<th class="py-space-md px-space-md font-headline-sm text-headline-sm">Assigned Tasks</th>
+<th class="py-space-md px-space-md font-headline-sm text-headline-sm">2FA Security</th>
+<th class="py-space-md px-space-md font-headline-sm text-headline-sm">Last Active</th>
+<th class="py-space-md px-space-md text-right font-headline-sm text-headline-sm">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-transparent font-body-md text-body-md">
+<!-- Row 1: Elena Rostova (Owner) -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-space-md px-space-md">
+<input class="rounded bg-surface-container-high accent-primary cursor-pointer w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<div class="relative shrink-0">
+<img alt="Elena Rostova" class="w-10 h-10 rounded-full object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida/AEtjO1UQDB5rHcl21xIxPpzBOr7qvlyST2C-_3-nab1EY_YrlIlxy0rpOW0RuRTFDdxpnV5-nLSzF7SOonimCE621nD_OV0s6wRnGUZxonsuUCJlYRPUybFLyLT4LpytRQo6PW7PYRaj1P4vHyWS8ibXg6VsQ_EgkfVM0y-RRwzTWNMGkO0dzBjoJeOdCk_xhOA_UeVNF0-I-BcrVWgf7_cuTVUojU-hdMVZmhy89qLhnEtQXdlVmLO4N8eO6g"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-body-bold text-body-bold text-on-surface">Elena Rostova</span>
+<span class="bg-primary-container/20 text-primary font-counter-sm text-counter-sm px-space-xs rounded-full">YOU</span>
+</div>
+<span class="font-label-code text-label-code text-outline text-xs truncate">elena@acme.com</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="inline-flex items-center gap-space-xs bg-secondary-container text-on-secondary-container px-space-sm py-space-2xs rounded-full font-counter-sm text-counter-sm font-semibold">
+<span class="material-symbols-outlined text-xs">shield_person</span>
+<span>Workspace Owner</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-space-xs max-w-xs">
+<span class="font-label-code text-label-code bg-surface-container-high text-on-surface-variant px-space-xs py-space-2xs rounded">#Platform</span>
+<span class="font-label-code text-label-code bg-surface-container-high text-on-surface-variant px-space-xs py-space-2xs rounded">#CoreArchitecture</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-body-bold text-body-bold text-on-surface">19 tasks</span>
+<span class="font-label-code text-label-code text-outline text-xs">4 active projects</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-xs font-label-code text-label-code text-tertiary">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span>Hardware Key (FIDO)</span>
+</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs text-tertiary font-body-sm text-body-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+<span>Active now</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-space-xs rounded-lg hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors" title="Settings">
+<span class="material-symbols-outlined text-base">tune</span>
+</button>
+<button class="p-space-xs rounded-lg hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors" title="More">
+<span class="material-symbols-outlined text-base">more_horiz</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Marcus Chen (Admin / Tech Lead) -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-space-md px-space-md">
+<input class="rounded bg-surface-container-high accent-primary cursor-pointer w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<div class="relative shrink-0">
+<img class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="Close-up portrait of Marcus Chen, an Asian male staff software architect in his early 30s with glasses, subtle dark slate studio lighting, professional minimalist developer style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp306xMzkYrKHsIO65zht-xPtyr4pYsqIp5ic3TSeYXQ8Rfj455mjVwWAW1WjKeePbhxI7NQumhejvL-zS5ml5U1ei5zH4lmhN1o0eebQ5zXhGzLInV1-O1AOfqEAmSEBJhO4o5s6dpogXglMfAUGgiLQJwMpmOObIRWp2YokCaVAhI0J_9A-ChEMzT6T6woWfBG7Kv4bflc4Vw0f1AyxFCiSakd_GFHJceVCyptg9L-p17ivHEyiF"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-bold text-body-bold text-on-surface">Marcus Chen</span>
+<span class="font-label-code text-label-code text-outline text-xs truncate">marcus.c@acme.com</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="inline-flex items-center gap-space-xs bg-primary-container/20 text-primary px-space-sm py-space-2xs rounded-full font-counter-sm text-counter-sm font-semibold">
+<span class="material-symbols-outlined text-xs">admin_panel_settings</span>
+<span>Admin / Tech Lead</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-space-xs max-w-xs">
+<span class="font-label-code text-label-code bg-surface-container-high text-on-surface-variant px-space-xs py-space-2xs rounded">#Backend</span>
+<span class="font-label-code text-label-code bg-surface-container-high text-on-surface-variant px-space-xs py-space-2xs rounded">#API-v2</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-body-bold text-body-bold text-on-surface">14 tasks</span>
+<span class="font-label-code text-label-code text-outline text-xs">3 active projects</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-xs font-label-code text-label-code text-tertiary">
+<span class="material-symbols-outlined text-sm">security</span>
+<span>Authenticator app</span>
+</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs text-tertiary font-body-sm text-body-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>Active now</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-space-xs rounded-lg hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors" title="Change Role">
+<span class="material-symbols-outlined text-base">manage_accounts</span>
+</button>
+<button class="p-space-xs rounded-lg hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors" title="More">
+<span class="material-symbols-outlined text-base">more_horiz</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Sarah Jenkins (Product Designer) -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-space-md px-space-md">
+<input class="rounded bg-surface-container-high accent-primary cursor-pointer w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<div class="relative shrink-0">
+<img class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="Portrait of Sarah Jenkins, senior product designer, blonde curly hair, creative expression, wearing dark minimalist turtleneck against a neutral moody slate backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYDyKIWIGf_8eltUL54JL5D_bX6ODspJACebZ37fTtoCnXQNhwH0TxZC8hBbyjszOqs8ZIzANOXuwsvPKn7WhSGBbqvJGRkSJh6qwZxT6_-ES4VISWmH4psI6dY9_zrS2RSQJhrswxE6jFxuJKO0_KjoZ-pmmFCBa9JsVkPp_kxTXsRXPUDz7-lfLRylc-u7xZvTSJWljhXtBj-u4JWWWDkVix4FiSIwwggfdtQNwNqSEJThDayxic"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-outline"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-bold text-body-bold text-on-surface">Sarah Jenkins</span>
+<span class="font-label-code text-label-code text-outline text-xs truncate">sarah.j@acme.com</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="inline-flex items-center gap-space-xs bg-surface-container-high text-on-surface-variant px-space-sm py-space-2xs rounded-full font-counter-sm text-counter-sm">
+<span class="material-symbols-outlined text-xs">palette</span>
+<span>Product Designer</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-space-xs max-w-xs">
+<span class="font-label-code text-label-code bg-surface-container-high text-on-surface-variant px-space-xs py-space-2xs rounded">#Design</span>
+<span class="font-label-code text-label-code bg-surface-container-high text-on-surface-variant px-space-xs py-space-2xs rounded">#DesignSystem</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-body-bold text-body-bold text-on-surface">8 tasks</span>
+<span class="font-label-code text-label-code text-outline text-xs">2 active projects</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-xs font-label-code text-label-code text-tertiary">
+<span class="material-symbols-outlined text-sm">security</span>
+<span>Enabled (SMS)</span>
+</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-body-sm text-body-sm text-outline">15m ago</span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-space-xs rounded-lg hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">manage_accounts</span>
+</button>
+<button class="p-space-xs rounded-lg hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">more_horiz</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Marek Kowal (DevOps Lead) -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-space-md px-space-md">
+<input class="rounded bg-surface-container-high accent-primary cursor-pointer w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<div class="relative shrink-0">
+<img class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="Portrait of Marek Kowal, DevOps Lead with short trimmed beard, confident calm expression, soft studio lighting with slight cyan/indigo edge glow, tech workspace background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuAJsENOA876MKLJWfSktC5-O2jBy6yq5BOaRIGFimb_j3cal94_NX_FnHedFqLVxv2eTzyHwajqI6vaDAW9koGAOSG-E5ncimM9PwsAThxzuvYidbCpamncSg5X8dux_nyYsgwGHLtqOsSFWph1WJvBaBo_DRSCio0tP-E9lkeAmhRK3Ijitawr6HjvxTK6vxefHMHPdJJUvxYZqsHhXVy31imVrLXD7hWHql5L-fMNLRhELxT7bP"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-outline"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-bold text-body-bold text-on-surface">Marek Kowal</span>
+<span class="font-label-code text-label-code text-outline text-xs truncate">marek.k@acme.com</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="inline-flex items-center gap-space-xs bg-primary-container/20 text-primary px-space-sm py-space-2xs rounded-full font-counter-sm text-counter-sm font-semibold">
+<span class="material-symbols-outlined text-xs">terminal</span>
+<span>DevOps Lead</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-space-xs max-w-xs">
+<span class="font-label-code text-label-code bg-surface-container-high text-on-surface-variant px-space-xs py-space-2xs rounded">#DevOps</span>
+<span class="font-label-code text-label-code bg-surface-container-high text-on-surface-variant px-space-xs py-space-2xs rounded">#Infra-K8s</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-body-bold text-body-bold text-on-surface">22 tasks</span>
+<span class="font-label-code text-label-code text-outline text-xs">5 active projects</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-xs font-label-code text-label-code text-tertiary">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span>Hardware Key (YubiKey)</span>
+</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-body-sm text-body-sm text-outline">1h ago</span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-space-xs rounded-lg hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">manage_accounts</span>
+</button>
+<button class="p-space-xs rounded-lg hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">more_horiz</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Devon Chen (Frontend Engineer) -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-space-md px-space-md">
+<input class="rounded bg-surface-container-high accent-primary cursor-pointer w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-body-bold text-body-bold text-primary">
+                      DC
+                    </div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-outline"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-bold text-body-bold text-on-surface">Devon Chen</span>
+<span class="font-label-code text-label-code text-outline text-xs truncate">devon.c@acme.com</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="inline-flex items-center gap-space-xs bg-surface-container-high text-on-surface-variant px-space-sm py-space-2xs rounded-full font-counter-sm text-counter-sm">
+<span class="material-symbols-outlined text-xs">code</span>
+<span>Frontend Engineer</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-space-xs max-w-xs">
+<span class="font-label-code text-label-code bg-surface-container-high text-on-surface-variant px-space-xs py-space-2xs rounded">#Mobile</span>
+<span class="font-label-code text-label-code bg-surface-container-high text-on-surface-variant px-space-xs py-space-2xs rounded">#WebClient</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-body-bold text-body-bold text-on-surface">11 tasks</span>
+<span class="font-label-code text-label-code text-outline text-xs">2 active projects</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-xs font-label-code text-label-code text-tertiary">
+<span class="material-symbols-outlined text-sm">security</span>
+<span>Enabled (App)</span>
+</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-body-sm text-body-sm text-outline">Yesterday</span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-space-xs rounded-lg hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">manage_accounts</span>
+</button>
+<button class="p-space-xs rounded-lg hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">more_horiz</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6: Aisha Patel (Product Manager) -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-space-md px-space-md">
+<input class="rounded bg-surface-container-high accent-primary cursor-pointer w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center font-body-bold text-body-bold text-on-secondary-container">
+                      AP
+                    </div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-outline"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-bold text-body-bold text-on-surface">Aisha Patel</span>
+<span class="font-label-code text-label-code text-outline text-xs truncate">aisha.p@acme.com</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="inline-flex items-center gap-space-xs bg-surface-container-high text-on-surface px-space-sm py-space-2xs rounded-full font-counter-sm text-counter-sm font-semibold">
+<span class="material-symbols-outlined text-xs">assignment_ind</span>
+<span>Product Manager</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-space-xs max-w-xs">
+<span class="font-label-code text-label-code bg-surface-container-high text-on-surface-variant px-space-xs py-space-2xs rounded">#Mobile</span>
+<span class="font-label-code text-label-code bg-surface-container-high text-on-surface-variant px-space-xs py-space-2xs rounded">#Growth</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-body-bold text-body-bold text-on-surface">17 tasks</span>
+<span class="font-label-code text-label-code text-outline text-xs">4 active projects</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-xs font-label-code text-label-code text-outline">
+<span class="material-symbols-outlined text-sm text-secondary">pending</span>
+<span>Pending Setup</span>
+</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-body-sm text-body-sm text-outline">2d ago</span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-space-xs rounded-lg hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">manage_accounts</span>
+</button>
+<button class="p-space-xs rounded-lg hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">more_horiz</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 7: Pending Invite Item -->
+<tr class="bg-surface-container-lowest/50 hover:bg-surface-container transition-colors">
+<td class="py-space-md px-space-md">
+<input class="rounded bg-surface-container-high accent-primary cursor-pointer w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-outline shrink-0">
+<span class="material-symbols-outlined text-lg">mail_lock</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-body-bold text-body-bold text-outline">Liam Gallagher</span>
+<span class="bg-surface-container-high text-outline font-counter-sm text-counter-sm px-space-xs rounded">INVITED</span>
+</div>
+<span class="font-label-code text-label-code text-outline text-xs truncate">liam.g@acme.com</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="inline-flex items-center gap-space-xs bg-surface-container text-outline px-space-sm py-space-2xs rounded-full font-counter-sm text-counter-sm">
+<span>QA Automation Lead</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-space-xs max-w-xs">
+<span class="font-label-code text-label-code bg-surface-container text-outline px-space-xs py-space-2xs rounded">#QA-Eng</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-code text-label-code text-outline text-xs">--</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-space-xs font-label-code text-label-code text-outline">
+<span class="material-symbols-outlined text-sm">hourglass_empty</span>
+<span>Awaiting Join</span>
+</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-body-sm text-body-sm text-outline">Invited Oct 28</span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="font-body-bold text-body-bold text-xs bg-surface-container-high hover:bg-surface-bright text-primary px-space-sm py-space-2xs rounded-lg transition-colors">
+                    Resend
+                  </button>
+<button class="font-body-bold text-body-bold text-xs hover:bg-error-container/20 text-error px-space-sm py-space-2xs rounded-lg transition-colors">
+                    Revoke
+                  </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination & Status Footer -->
+<div class="flex flex-col sm:flex-row items-center justify-between p-space-md bg-surface-container text-on-surface-variant font-body-sm text-body-sm gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span>Showing <strong class="text-on-surface font-body-bold">1-7</strong> of <strong class="text-on-surface font-body-bold">18</strong> workspace members</span>
+<span class="text-outline">•</span>
+<span class="text-outline">Filtered by Active Workspace</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-space-2xs rounded-lg bg-surface-container-low text-outline hover:text-on-surface transition-colors disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="px-space-sm py-space-2xs rounded-lg bg-primary text-on-primary font-body-bold text-body-bold text-xs">1</button>
+<button class="px-space-sm py-space-2xs rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors text-xs">2</button>
+<button class="px-space-sm py-space-2xs rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors text-xs">3</button>
+<button class="px-space-sm py-space-2xs rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Slideout Drawer / Invite Modal Backdrop & Drawer -->
+<div class="fixed inset-0 z-50 pointer-events-none transition-all duration-300 opacity-0" id="invite-drawer">
+<!-- Backdrop overlay -->
+<div class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm transition-opacity" id="drawer-backdrop"></div>
+<!-- Slideout Panel -->
+<div class="absolute right-0 top-0 bottom-0 w-full max-w-xl bg-surface-container-low shadow-2xl p-space-lg flex flex-col justify-between transform translate-x-full transition-transform duration-300 pointer-events-auto" id="drawer-panel">
+<div class="space-y-space-lg overflow-y-auto">
+<!-- Header -->
+<div class="flex items-center justify-between pb-space-md border-b border-outline-variant/20">
+<div class="space-y-space-2xs">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Invite Teammates</h2>
+<p class="font-body-sm text-body-sm text-outline">Collaborators will receive an invite link tied to @acme.com domain.</p>
+</div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container transition-colors" id="close-drawer-btn">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Inputs Form -->
+<div class="space-y-space-md">
+<div class="space-y-space-xs">
+<label class="font-body-bold text-body-bold text-xs uppercase text-outline tracking-wider">Email Addresses</label>
+<textarea class="w-full bg-surface-container px-space-md py-space-sm rounded-xl font-body-sm text-body-sm text-on-surface placeholder:text-outline border-none outline-none focus:ring-1 focus:ring-primary transition-all resize-none" placeholder="e.g. dev1@acme.com, dev2@acme.com (comma separated)" rows="3"></textarea>
+</div>
+<div class="grid grid-cols-2 gap-space-md">
+<div class="space-y-space-xs">
+<label class="font-body-bold text-body-bold text-xs uppercase text-outline tracking-wider">Default Role</label>
+<select class="w-full bg-surface-container px-space-md py-space-sm rounded-xl font-body-sm text-body-sm text-on-surface border-none outline-none cursor-pointer">
+<option>Member (Standard access)</option>
+<option>Admin (Manage settings)</option>
+<option>Manager (Team reporting)</option>
+<option>Guest (Single project only)</option>
+</select>
+</div>
+<div class="space-y-space-xs">
+<label class="font-body-bold text-body-bold text-xs uppercase text-outline tracking-wider">Primary Squad</label>
+<select class="w-full bg-surface-container px-space-md py-space-sm rounded-xl font-body-sm text-body-sm text-on-surface border-none outline-none cursor-pointer">
+<option>Core Platform</option>
+<option>Mobile Apps</option>
+<option>DevOps &amp; Infra</option>
+<option>Product &amp; Design</option>
+</select>
+</div>
+</div>
+<!-- Permission Scope Matrix Preview -->
+<div class="space-y-space-sm pt-space-sm">
+<span class="font-body-bold text-body-bold text-xs uppercase text-outline tracking-wider">Workspace Permissions Granted</span>
+<div class="space-y-space-xs bg-surface-container p-space-md rounded-xl font-body-sm text-body-sm">
+<div class="flex items-center justify-between">
+<span class="text-on-surface">Can create sprints &amp; epics</span>
+<span class="material-symbols-outlined text-tertiary text-sm">check_circle</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface">Can invite external guests</span>
+<span class="material-symbols-outlined text-outline text-sm">cancel</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface">Can deploy release branches</span>
+<span class="material-symbols-outlined text-tertiary text-sm">check_circle</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface">Can modify workspace billing</span>
+<span class="material-symbols-outlined text-outline text-sm">cancel</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Footer -->
+<div class="pt-space-md border-t border-outline-variant/20 flex items-center justify-between">
+<span class="font-label-code text-label-code text-outline text-xs">7 licenses remaining</span>
+<div class="flex items-center gap-space-sm">
+<button class="px-space-md py-space-sm rounded-xl font-body-bold text-body-bold text-on-surface-variant hover:bg-surface-container transition-colors" id="cancel-drawer-btn">
+            Cancel
+          </button>
+<button class="px-space-lg py-space-sm rounded-xl font-body-bold text-body-bold bg-primary text-on-primary hover:bg-primary-fixed transition-colors shadow-md">
+            Send Invitations
+          </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+    (function() {
+      const openBtn = document.getElementById('open-invite-btn');
+      const closeBtn = document.getElementById('close-drawer-btn');
+      const cancelBtn = document.getElementById('cancel-drawer-btn');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const drawer = document.getElementById('invite-drawer');
+      const panel = document.getElementById('drawer-panel');
+
+      function showDrawer() {
+        drawer.classList.remove('pointer-events-none', 'opacity-0');
+        drawer.classList.add('opacity-100');
+        panel.classList.remove('translate-x-full');
+      }
+
+      function hideDrawer() {
+        panel.classList.add('translate-x-full');
+        drawer.classList.remove('opacity-100');
+        drawer.classList.add('opacity-0', 'pointer-events-none');
+      }
+
+      if (openBtn) openBtn.addEventListener('click', showDrawer);
+      if (closeBtn) closeBtn.addEventListener('click', hideDrawer);
+      if (cancelBtn) cancelBtn.addEventListener('click', hideDrawer);
+      if (backdrop) backdrop.addEventListener('click', hideDrawer);
+
+      // Keyboard shortcut ⌘F or / to focus search
+      window.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
+          e.preventDefault();
+          const searchInput = document.getElementById('member-search-input');
+          if (searchInput) searchInput.focus();
+        }
+        if (e.key === 'Escape') {
+          hideDrawer();
+        }
+      });
+    })();
+  </script>
+</div></main></div></body></html>
