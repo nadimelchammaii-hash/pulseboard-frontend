@@ -38,3 +38,28 @@ jobs:
       # one step covers both type errors and bundling failures.
       - name: Type-check and build
         run: npm run build
+
+  # Proves the Dockerfile still builds and the image can run Vite, so a broken image
+  # is caught on the PR rather than at the next `docker compose build`. Nothing is
+  # pushed anywhere.
+  docker-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          load: true
+          tags: pulseboard-frontend:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Smoke test image
+        run: docker run --rm pulseboard-frontend:ci npx vite --version
