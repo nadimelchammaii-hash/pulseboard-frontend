@@ -1,0 +1,35 @@
+# Production image: build the static bundle once, then serve it from plain nginx.
+# The dev Dockerfile (Vite dev server) stays as-is for local work.
+
+FROM node:22-alpine AS build
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY . .
+
+# Vite bakes VITE_* values into the JavaScript at build time, so they are build
+# arguments here rather than runtime environment variables. Changing the domain
+# means rebuilding this image.
+ARG VITE_API_URL
+ARG VITE_REVERB_APP_KEY
+ARG VITE_REVERB_HOST
+ARG VITE_REVERB_PORT
+ARG VITE_REVERB_SCHEME
+ENV VITE_API_URL=$VITE_API_URL \
+    VITE_REVERB_APP_KEY=$VITE_REVERB_APP_KEY \
+    VITE_REVERB_HOST=$VITE_REVERB_HOST \
+    VITE_REVERB_PORT=$VITE_REVERB_PORT \
+    VITE_REVERB_SCHEME=$VITE_REVERB_SCHEME
+
+# Type-checking already runs in CI; the image only needs the bundle.
+RUN npm run build-only
+
+FROM nginx:alpine
+
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html
+
+EXPOSE 80
