@@ -58,8 +58,32 @@ jobs:
           push: false
           load: true
           tags: pulseboard-frontend:ci
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=dev
+          cache-to: type=gha,mode=max,scope=dev
 
       - name: Smoke test image
         run: docker run --rm pulseboard-frontend:ci npx vite --version
+
+      # The image actually used in production (Step 5a) - built separately so a
+      # regression there is caught on the PR, not at the next real deploy. The
+      # VITE_* values are placeholders: only build-time wiring is being checked here,
+      # nothing here talks to a real backend.
+      - name: Build production image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile.prod
+          push: false
+          load: true
+          tags: pulseboard-frontend:prod-ci
+          build-args: |
+            VITE_API_URL=https://ci.example.com
+            VITE_REVERB_APP_KEY=ci-placeholder
+            VITE_REVERB_HOST=ci.example.com
+            VITE_REVERB_PORT=443
+            VITE_REVERB_SCHEME=https
+          cache-from: type=gha,scope=prod
+          cache-to: type=gha,mode=max,scope=prod
+
+      - name: Smoke test production image
+        run: docker run --rm pulseboard-frontend:prod-ci nginx -t
