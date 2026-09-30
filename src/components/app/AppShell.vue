@@ -20,19 +20,14 @@
     </div>
 
     <v-list class="px-2" density="compact" nav>
-      <v-list-subheader class="text-uppercase">Workspace</v-list-subheader>
+      <v-list-subheader class="text-uppercase">General</v-list-subheader>
 
-      <v-list-item prepend-icon="mdi-view-grid-outline" rounded="xl" title="Workspaces" to="/" />
+      <v-list-item prepend-icon="mdi-view-grid-outline" rounded="xl" title="All Workspaces" to="/" />
 
       <v-list-item prepend-icon="mdi-bell-outline" rounded="xl" title="Notifications" :to="{ name: 'notifications' }" />
 
       <template v-if="workspaceId">
-        <v-list-item
-          prepend-icon="mdi-account-group-outline"
-          rounded="xl"
-          title="Members"
-          :to="{ name: 'workspace-members', params: { workspaceId } }"
-        />
+        <v-list-subheader class="text-uppercase">Current Workspace</v-list-subheader>
 
         <v-list-item
           prepend-icon="mdi-view-column-outline"
@@ -47,32 +42,30 @@
           title="Activity Feed"
           :to="{ name: 'workspace-activity', params: { workspaceId } }"
         />
+
+        <v-list-item
+          prepend-icon="mdi-account-group-outline"
+          rounded="xl"
+          title="Members"
+          :to="{ name: 'workspace-members', params: { workspaceId } }"
+        />
       </template>
 
-      <v-list-item
-        v-else
-        disabled
-        prepend-icon="mdi-view-column-outline"
-        rounded="xl"
-        title="Projects / Boards"
-      >
-        <template #append>
-          <span class="text-caption text-outline">Soon</span>
-        </template>
-      </v-list-item>
+      <p v-else class="app-shell__hint text-caption text-on-surface-variant px-2 pt-2 pb-1">
+        Select a workspace above to see its projects, members and activity.
+      </p>
+
+      <v-list-subheader class="text-uppercase">Coming Soon</v-list-subheader>
 
       <v-list-item
         v-for="item in comingSoonNav"
         :key="item.title"
+        class="app-shell__soon-item"
         disabled
         :prepend-icon="item.icon"
         rounded="xl"
         :title="item.title"
-      >
-        <template #append>
-          <span class="text-caption text-outline">Soon</span>
-        </template>
-      </v-list-item>
+      />
     </v-list>
 
     <template #append>
@@ -193,5 +186,13 @@
 .app-shell__page-title {
   font-family: var(--font-heading);
   font-weight: 600;
+}
+
+.app-shell__hint {
+  line-height: 1.4;
+}
+
+.app-shell__soon-item {
+  opacity: 0.55;
 }
 </style>
