@@ -7,6 +7,9 @@ export interface User {
   email_verified_at: string | null
   created_at: string
   updated_at: string
+  /** A temporary "Try the demo" account, deleted at demo_expires_at. */
+  is_demo: boolean
+  demo_expires_at: string | null
 }
 
 interface UserResponse {
@@ -61,6 +64,13 @@ export async function register (payload: RegisterPayload): Promise<User> {
 export async function login (payload: LoginPayload): Promise<User> {
   await ensureCsrfCookie()
   const { data } = await client.post<UserResponse>('/api/v1/login', payload)
+  return data.data
+}
+
+/** "Try the demo": creates a private demo account with sample data and signs in to it. */
+export async function startDemo (): Promise<User> {
+  await ensureCsrfCookie()
+  const { data } = await client.post<UserResponse>('/api/v1/demo')
   return data.data
 }
 

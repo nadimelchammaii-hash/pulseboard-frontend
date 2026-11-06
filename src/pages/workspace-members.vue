@@ -168,6 +168,7 @@
   import { isAxiosError } from 'axios'
   import { computed, onMounted, ref } from 'vue'
   import { useRoute } from 'vue-router'
+  import { apiErrorMessage } from '@/api/client'
   import AppShell from '@/components/app/AppShell.vue'
   import { useAuthStore } from '@/stores/auth'
   import { useWorkspaceStore } from '@/stores/workspaces'
@@ -254,7 +255,9 @@
       if (isAxiosError(error) && error.response?.status === 422) {
         inviteErrors.value = error.response.data.errors ?? {}
       } else {
-        formError.value = 'Something went wrong. Please try again.'
+        // Close the dialog so the page's alert (e.g. invites turned off in the demo) is visible.
+        inviteDialog.value = false
+        formError.value = apiErrorMessage(error, 'Something went wrong. Please try again.')
       }
     } finally {
       inviting.value = false

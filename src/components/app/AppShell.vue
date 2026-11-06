@@ -72,7 +72,12 @@
       <div class="pa-2">
         <v-menu>
           <template #activator="{ props: menuProps }">
-            <v-list-item rounded="xl" v-bind="menuProps" :subtitle="authStore.user?.email" :title="authStore.user?.name">
+            <v-list-item
+              rounded="xl"
+              v-bind="menuProps"
+              :subtitle="authStore.isDemo ? 'Demo account' : authStore.user?.email"
+              :title="authStore.user?.name"
+            >
               <template #prepend>
                 <v-avatar color="primary" size="32">
                   <span class="text-caption font-weight-bold">{{ initials }}</span>
@@ -82,7 +87,8 @@
           </template>
 
           <v-list density="compact">
-            <v-list-item prepend-icon="mdi-logout" title="Log out" @click="handleLogout" />
+            <!-- A demo account cannot be signed in to again, so signing out ends the demo. -->
+            <v-list-item prepend-icon="mdi-logout" :title="authStore.isDemo ? 'End demo' : 'Log out'" @click="handleLogout" />
           </v-list>
         </v-menu>
       </div>
@@ -102,6 +108,8 @@
   </v-app-bar>
 
   <v-container class="pa-6" fluid>
+    <DemoBanner v-if="authStore.isDemo" class="mb-6" />
+
     <slot />
   </v-container>
 </template>
@@ -109,6 +117,7 @@
 <script lang="ts" setup>
   import { computed, onMounted, onUnmounted } from 'vue'
   import { useRouter } from 'vue-router'
+  import DemoBanner from '@/components/app/DemoBanner.vue'
   import { useAuthStore } from '@/stores/auth'
   import { useNotificationStore } from '@/stores/notifications'
 

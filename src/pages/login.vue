@@ -8,6 +8,40 @@
       Sign in to access your workspaces, boards, and team activity.
     </template>
 
+    <!-- Try the demo: the first thing a visitor sees, above the sign-in form. -->
+    <v-alert
+      v-if="demoError"
+      class="mb-4"
+      color="error"
+      density="compact"
+      role="alert"
+      variant="tonal"
+    >
+      {{ demoError }}
+    </v-alert>
+
+    <v-btn
+      block
+      color="primary"
+      :loading="startingDemo"
+      prepend-icon="mdi-play-circle-outline"
+      size="large"
+      variant="outlined"
+      @click="tryDemo"
+    >
+      Try the demo
+    </v-btn>
+
+    <p class="mt-2 text-center text-caption text-on-surface-variant">
+      No sign-up needed: a private demo with sample data, deleted after 24 hours.
+    </p>
+
+    <div class="d-flex align-center ga-3 my-5" role="presentation">
+      <v-divider />
+      <span class="text-caption text-on-surface-variant text-no-wrap">or sign in</span>
+      <v-divider />
+    </div>
+
     <v-alert
       v-if="formError"
       class="mb-4"
@@ -81,11 +115,31 @@
   import { isAxiosError } from 'axios'
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
+  import { apiErrorMessage } from '@/api/client'
   import AuthShell from '@/components/auth/AuthShell.vue'
   import { useAuthStore } from '@/stores/auth'
 
   const router = useRouter()
   const authStore = useAuthStore()
+
+  const startingDemo = ref(false)
+  const demoError = ref('')
+
+  async function tryDemo () {
+    if (startingDemo.value) return
+    startingDemo.value = true
+    demoError.value = ''
+
+    try {
+      await authStore.startDemo()
+      await router.push({ name: 'home' })
+    } catch (error) {
+      // The API's limit messages (too many demos, demo switched off) are written for the visitor.
+      demoError.value = apiErrorMessage(error, 'Could not start the demo. Please try again.')
+    } finally {
+      startingDemo.value = false
+    }
+  }
 
   const email = ref('')
   const password = ref('')

@@ -16,6 +16,8 @@ export const useAuthStore = defineStore('auth', () => {
   const status = ref<AuthStatus>('idle')
 
   const isAuthenticated = computed(() => status.value === 'authenticated')
+  /** Signed in to a temporary "Try the demo" account. */
+  const isDemo = computed(() => user.value?.is_demo === true)
 
   async function fetchUser () {
     status.value = 'loading'
@@ -39,6 +41,11 @@ export const useAuthStore = defineStore('auth', () => {
     status.value = 'authenticated'
   }
 
+  async function startDemo () {
+    user.value = await authApi.startDemo()
+    status.value = 'authenticated'
+  }
+
   async function logout () {
     await authApi.logout()
     user.value = null
@@ -57,9 +64,11 @@ export const useAuthStore = defineStore('auth', () => {
     user,
     status,
     isAuthenticated,
+    isDemo,
     fetchUser,
     login,
     register,
+    startDemo,
     logout,
     updateProfile,
     updatePassword,

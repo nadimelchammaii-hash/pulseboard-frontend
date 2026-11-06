@@ -191,6 +191,7 @@
   import type { TaskPriority, TaskStatus } from '@/api/tasks'
   import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
+  import { apiErrorMessage } from '@/api/client'
   import AppShell from '@/components/app/AppShell.vue'
   import { useProjectStore } from '@/stores/projects'
   import { useTaskStore } from '@/stores/tasks'
@@ -275,8 +276,8 @@
     try {
       await taskStore.addComment(workspaceId.value, projectId.value, taskId.value, newComment.value.trim())
       newComment.value = ''
-    } catch {
-      formError.value = 'Could not post that comment. Please try again.'
+    } catch (error) {
+      formError.value = apiErrorMessage(error, 'Could not post that comment. Please try again.')
     } finally {
       commenting.value = false
     }

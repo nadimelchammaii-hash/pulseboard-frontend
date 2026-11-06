@@ -168,6 +168,7 @@
   import { isAxiosError } from 'axios'
   import { computed, onMounted, onUnmounted, ref } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
+  import { apiErrorMessage } from '@/api/client'
   import AppShell from '@/components/app/AppShell.vue'
   import { useProjectStore } from '@/stores/projects'
   import { useTaskStore } from '@/stores/tasks'
@@ -279,7 +280,9 @@
       if (isAxiosError(error) && error.response?.status === 422) {
         createErrors.value = error.response.data.errors ?? {}
       } else {
-        formError.value = 'Something went wrong. Please try again.'
+        // Close the dialog so the page's alert (e.g. a demo limit) is visible.
+        createDialog.value = false
+        formError.value = apiErrorMessage(error, 'Something went wrong. Please try again.')
       }
     } finally {
       creating.value = false
