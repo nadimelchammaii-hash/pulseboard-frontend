@@ -5,7 +5,7 @@
         <h1 class="index__heading mb-1">Your workspaces</h1>
 
         <p class="text-body-2 text-on-surface-variant">
-          Pick a workspace to manage its members, or create a new one.
+          Open a workspace to see its boards, or create a new one.
         </p>
       </div>
 
@@ -47,7 +47,15 @@
         md="4"
         sm="6"
       >
-        <v-card class="pa-4" color="surface-container-low" :elevation="0">
+        <!-- The whole card opens the workspace's boards; the name is the keyboard-focusable link. -->
+        <v-card
+          class="pa-4 index__card"
+          color="surface-container-low"
+          :elevation="0"
+          link
+          :ripple="false"
+          @click="goToProjects(workspace.id)"
+        >
           <div class="d-flex align-start justify-space-between mb-3">
             <v-avatar color="surface-container-high" rounded="lg" size="40">
               <v-icon color="primary">mdi-view-grid-outline</v-icon>
@@ -59,11 +67,17 @@
               icon="mdi-delete-outline"
               size="small"
               variant="text"
-              @click="confirmDelete(workspace)"
+              @click.stop="confirmDelete(workspace)"
             />
           </div>
 
-          <div class="text-body-1 font-weight-medium text-truncate mb-1">{{ workspace.name }}</div>
+          <router-link
+            class="index__name d-block text-body-1 font-weight-medium text-truncate text-decoration-none mb-1"
+            :to="{ name: 'workspace-projects', params: { workspaceId: workspace.id } }"
+            @click.stop
+          >
+            {{ workspace.name }}
+          </router-link>
 
           <div class="d-flex align-center ga-2 mb-4">
             <v-chip color="primary" density="comfortable" size="small" variant="tonal">
@@ -75,9 +89,21 @@
             </span>
           </div>
 
-          <v-btn block color="primary" variant="tonal" @click="goToMembers(workspace.id)">
-            View members
-          </v-btn>
+          <div class="d-flex align-center justify-space-between">
+            <span class="text-body-2 text-primary font-weight-medium">
+              Open boards <v-icon size="16">mdi-arrow-right</v-icon>
+            </span>
+
+            <v-btn
+              color="on-surface-variant"
+              prepend-icon="mdi-account-group-outline"
+              size="small"
+              variant="text"
+              @click.stop="goToMembers(workspace.id)"
+            >
+              View members
+            </v-btn>
+          </div>
         </v-card>
       </v-col>
     </v-row>
@@ -154,6 +180,10 @@
     return roleLabels[role]
   }
 
+  function goToProjects (workspaceId: number) {
+    router.push({ name: 'workspace-projects', params: { workspaceId } })
+  }
+
   function goToMembers (workspaceId: number) {
     router.push({ name: 'workspace-members', params: { workspaceId } })
   }
@@ -205,6 +235,18 @@
 </script>
 
 <style scoped>
+.index__card {
+  cursor: pointer;
+}
+
+.index__name {
+  color: rgb(var(--v-theme-on-surface));
+}
+
+.index__card:hover .index__name {
+  color: rgb(var(--v-theme-primary));
+}
+
 .index__heading {
   font-family: var(--font-heading);
   font-weight: 600;

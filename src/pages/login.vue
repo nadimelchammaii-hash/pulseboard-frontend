@@ -131,8 +131,12 @@
     demoError.value = ''
 
     try {
-      await authStore.startDemo()
-      await router.push({ name: 'home' })
+      // Straight to the sample board: the best first look at the app.
+      const landing = await authStore.startDemo()
+      await router.push({
+        name: 'project-board',
+        params: { workspaceId: landing.workspace_id, projectId: landing.project_id },
+      })
     } catch (error) {
       // The API's limit messages (too many demos, demo switched off) are written for the visitor.
       demoError.value = apiErrorMessage(error, 'Could not start the demo. Please try again.')

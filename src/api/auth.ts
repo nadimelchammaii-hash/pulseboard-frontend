@@ -68,10 +68,20 @@ export async function login (payload: LoginPayload): Promise<User> {
 }
 
 /** "Try the demo": creates a private demo account with sample data and signs in to it. */
-export async function startDemo (): Promise<User> {
+/** Where a new demo opens: its sample board. */
+export interface DemoLanding {
+  workspace_id: number
+  project_id: number
+}
+
+interface DemoResponse extends UserResponse {
+  meta: { landing: DemoLanding }
+}
+
+export async function startDemo (): Promise<{ user: User, landing: DemoLanding }> {
   await ensureCsrfCookie()
-  const { data } = await client.post<UserResponse>('/api/v1/demo')
-  return data.data
+  const { data } = await client.post<DemoResponse>('/api/v1/demo')
+  return { user: data.data, landing: data.meta.landing }
 }
 
 export async function logout (): Promise<void> {

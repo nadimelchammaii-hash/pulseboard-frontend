@@ -41,9 +41,12 @@ export const useAuthStore = defineStore('auth', () => {
     status.value = 'authenticated'
   }
 
+  /** Starts a demo and returns the sample board to open. */
   async function startDemo () {
-    user.value = await authApi.startDemo()
+    const demo = await authApi.startDemo()
+    user.value = demo.user
     status.value = 'authenticated'
+    return demo.landing
   }
 
   async function logout () {

@@ -4,6 +4,14 @@ import client from './client'
 export type TaskStatus = 'todo' | 'in_progress' | 'review' | 'done'
 export type TaskPriority = 'low' | 'medium' | 'high' | 'urgent'
 
+/** Column names on the board, for showing a status to people. */
+export const taskStatusLabels: Record<TaskStatus, string> = {
+  todo: 'To Do',
+  in_progress: 'In Progress',
+  review: 'Review',
+  done: 'Done',
+}
+
 export interface Task {
   id: number
   project_id: number

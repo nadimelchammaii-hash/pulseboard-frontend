@@ -15,7 +15,7 @@
         <div class="font-weight-medium mb-1">You are exploring the PulseBoard demo</div>
 
         <div class="text-body-2">
-          Everything here is private to you<span v-if="endsAt"> and deleted on {{ endsAt }}</span>.
+          Everything here is private to you and deleted after 24 hours<span v-if="endsAt"> (on {{ endsAt }})</span>.
           Maya, Sam and Priya are fictional teammates; inviting people and changing account details are turned off.
         </div>
       </div>

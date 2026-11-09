@@ -52,20 +52,8 @@
       </template>
 
       <p v-else class="app-shell__hint text-caption text-on-surface-variant px-2 pt-2 pb-1">
-        Select a workspace above to see its projects, members and activity.
+        Open a workspace to see its projects, members and activity.
       </p>
-
-      <v-list-subheader class="text-uppercase">Coming Soon</v-list-subheader>
-
-      <v-list-item
-        v-for="item in comingSoonNav"
-        :key="item.title"
-        class="app-shell__soon-item"
-        disabled
-        :prepend-icon="item.icon"
-        rounded="xl"
-        :title="item.title"
-      />
     </v-list>
 
     <template #append>
@@ -154,12 +142,6 @@
       .toUpperCase()
   })
 
-  const comingSoonNav = [
-    { title: 'Dashboard', icon: 'mdi-view-dashboard-outline' },
-    { title: 'My Tasks', icon: 'mdi-check-circle-outline' },
-    { title: 'Settings', icon: 'mdi-cog-outline' },
-  ]
-
   async function handleLogout () {
     await authStore.logout()
     await router.push({ name: 'login' })
@@ -199,9 +181,5 @@
 
 .app-shell__hint {
   line-height: 1.4;
-}
-
-.app-shell__soon-item {
-  opacity: 0.55;
 }
 </style>

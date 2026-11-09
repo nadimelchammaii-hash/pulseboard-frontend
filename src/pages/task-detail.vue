@@ -188,10 +188,10 @@
 </template>
 
 <script lang="ts" setup>
-  import type { TaskPriority, TaskStatus } from '@/api/tasks'
   import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import { apiErrorMessage } from '@/api/client'
+  import { type TaskPriority, type TaskStatus, taskStatusLabels } from '@/api/tasks'
   import AppShell from '@/components/app/AppShell.vue'
   import { useProjectStore } from '@/stores/projects'
   import { useTaskStore } from '@/stores/tasks'
@@ -209,7 +209,9 @@
   const loading = ref(true)
   const formError = ref('')
 
-  const statusOptions: TaskStatus[] = ['todo', 'in_progress', 'review', 'done']
+  // Shown with the board's column names; the raw value is what the API receives.
+  const statusOptions = (Object.keys(taskStatusLabels) as TaskStatus[])
+    .map(value => ({ value, title: taskStatusLabels[value] }))
   const priorityOptions: TaskPriority[] = ['low', 'medium', 'high', 'urgent']
 
   const editable = ref({
